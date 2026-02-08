@@ -54,14 +54,25 @@ export default function Hero() {
           }}
         />
 
-        {/* Premium Subtle Dot Grid Overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.12] pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(circle, #2D9B6B 1px, transparent 1px)',
-            backgroundSize: '32px 32px'
-          }}
-        />
+        {/* Premium Subtle Dot Grid & Lines Overlay */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Dot Grid */}
+          <div
+            className="absolute inset-0 opacity-[0.12]"
+            style={{
+              backgroundImage: 'radial-gradient(circle, #2D9B6B 1px, transparent 1px)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+          {/* Faint Lines */}
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: 'linear-gradient(to right, #2D9B6B 1px, transparent 1px), linear-gradient(to bottom, #2D9B6B 1px, transparent 1px)',
+              backgroundSize: '128px 128px'
+            }}
+          />
+        </div>
       </div>
 
       {/* Content Container */}
