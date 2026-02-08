@@ -40,7 +40,11 @@ export default function Hero() {
             backgroundImage: "url('/hero-bg-v2.webp')",
             clipPath: 'polygon(100% 0, 100% 100%, 35% 100%)'
           }}
-        />
+        >
+          {/* Green 50% Opacity Overlay - Mixed with Multiply for depth */}
+          <div className="absolute inset-0 bg-brand-green/30 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-brand-green/20" />
+        </div>
 
         {/* Dark Left Side with Radial Gradient for Depth */}
         <div
@@ -50,9 +54,13 @@ export default function Hero() {
           }}
         />
 
-        {/* Subtle Decorative Grid/Lines */}
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
-          style={{ backgroundImage: 'linear-gradient(45deg, #2D9B6B 1px, transparent 1px), linear-gradient(-45deg, #2D9B6B 1px, transparent 1px)', backgroundSize: '80px 80px' }}
+        {/* Premium Subtle Dot Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.12] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #2D9B6B 1px, transparent 1px)',
+            backgroundSize: '32px 32px'
+          }}
         />
       </div>
 
