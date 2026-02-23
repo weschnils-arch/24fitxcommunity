@@ -21,7 +21,7 @@ const steps = [
     number: '03',
     title: 'Durchstarten',
     description:
-      'Werde Teil unserer Community, nimm an den Live-Workouts teil und setze deinen Plan mit unserer Hilfe um.',
+      'Werde Teil unserer Community, nutze unseren Service ON- oder OFFLINE und setze deinen Plan mit unserer Hilfe um.',
   },
   {
     icon: Trophy,
@@ -68,16 +68,14 @@ export default function Process() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2
-            className={`section-title transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`section-title transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
             DEIN WEG ZU UNS
           </h2>
           <h3
-            className={`section-headline transition-all duration-700 delay-100 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`section-headline transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
             In 4 einfachen Schritten zu deinem neuen Ich.
           </h3>
@@ -94,9 +92,8 @@ export default function Process() {
               {steps.map((step, index) => (
                 <div
                   key={index}
-                  className={`relative text-center transition-all duration-500 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  }`}
+                  className={`relative text-center transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                    }`}
                   style={{ transitionDelay: `${200 + index * 150}ms` }}
                 >
                   {/* Number Circle */}
@@ -129,9 +126,8 @@ export default function Process() {
               {steps.map((step, index) => (
                 <div
                   key={index}
-                  className={`relative flex items-start gap-6 transition-all duration-500 ${
-                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-                  }`}
+                  className={`relative flex items-start gap-6 transition-all duration-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                    }`}
                   style={{ transitionDelay: `${200 + index * 150}ms` }}
                 >
                   {/* Number Circle */}

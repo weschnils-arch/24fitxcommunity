@@ -1,54 +1,42 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, X } from 'lucide-react';
 
 const transformations = [
   {
-    image: '/images/results/Screenshot 2026-02-08 at 2.30.24 PM.webp',
-    name: 'CHRI',
-    title: 'Polizist & Fitness-Daddy',
-    description: 'Familie, Job und seine Fitnessziele unter einen Hut zu bekommen ist nicht immer einfach – doch mit der Community gelingt\'s.'
+    image: '/images/results/Patrizia_P.webp',
+    name: 'PATRIZIA P.',
+    title: 'Working Mom',
+    description: '„Mit zwei Kindern und Job dachte ich ehrlich, das schaffe ich nie. Jetzt habe ich abgenommen, mein Bauch ist straffer und ich habe endlich wieder Energie für meine Familie.“'
   },
   {
-    image: '/images/results/Screenshot 2026-02-08 at 2.30.33 PM.webp',
-    name: 'KATHARINA',
-    title: 'Fit Mom',
-    description: 'Vor der Schwangerschaft hatte ich tolle Resultate mit dem Anti-Cellulite Programm und auch danach konnte ich schnell wieder mein Wunschgewicht erreichen – einfach GENIAL!'
+    image: '/images/results/Ogi_O.webp',
+    name: 'OGI O.',
+    title: 'Fitness Transformation',
+    description: '„Ich war unsportlich und saß gefühlt nur auf der Couch. Mit dem Konzept habe ich wieder Energie, einfache Ernährungslösungen für den Alltag, viele Kilos verloren und wieder Motivation für Sport!"'
   },
   {
-    image: '/images/results/Screenshot 2026-02-08 at 2.30.39 PM.webp',
-    name: 'NICI & AGRON',
-    title: 'Erfolgreiche Unternehmer',
-    description: 'Wir konnten beide mit dem Konzept einige Kilos reduzieren und have ein neues Lebensgefühl gewonnen. Was wir besonders schätzen ist die tolle Community und der Zusammenhalt.'
-  },
-  {
-    image: '/images/results/Screenshot 2026-02-08 at 2.30.44 PM.webp',
-    name: 'ULLI',
-    title: 'Fit für die Pension',
-    description: 'Nach unzähligen Diäten konnte ich mit über 50, trotz wenig Sport, 3 Kleidergrößen reduzieren. Ich liebe die Challenges, das Live Backen und den gesamten Service.'
-  },
-  {
-    image: '/images/results/Screenshot 2026-02-08 at 2.30.51 PM.webp',
-    name: 'HANNES',
-    title: 'Handwerker',
-    description: 'Mit knapp 30 Jahren war ich komplett ausgelaugt und antriebslos. Dann habe ich das Konzept kennengelernt und konnte so meinen Körper in Bestform bringen.'
-  },
-  {
-    image: '/images/results/Screenshot 2026-02-08 at 2.30.56 PM.webp',
-    name: 'SIMONE',
-    title: 'Büroangestellte',
-    description: 'Ich fühle mich so gut wie noch nie und das dank dem FIT & BEAUTY Programm und der positiven Energie. Ich konnte meine Haut am ganzen Körper straffen und Cellulite reduzieren.'
-  },
-  {
-    image: '/images/results/Screenshot 2026-02-08 at 2.31.03 PM.webp',
-    name: 'NADINE & STEFAN',
-    title: 'Fit Family',
-    description: 'Wir lieben die Rezepte für die ganze Familie aber auch, dass wir alle Spaß & Motivation an den Fitclubs haben und so Vorbilder für unsere Kids sein können.'
-  },
-  {
-    image: '/images/results/Screenshot 2026-02-08 at 2.30.04 PM.webp',
-    name: 'MARCELA',
+    image: '/images/results/Marcela_K.webp',
+    name: 'MARCELA K.',
     title: 'Krankenschwester',
-    description: 'Ich habe nach einer Lösung gesucht die mir Energie gibt und sich mit meinen Schichtdiensten vereinbaren lässt. Bin dankbar für das coole Konzept und die kompetente Betreuung.'
+    description: '„Mein Job ist stressig und die Schichten als Krankenschwester wechseln ständig. Das Konzept hat mir gezeigt, dass gesunde Routinen trotzdem möglich sind.“'
+  },
+  {
+    image: '/images/results/Eva_K.webp',
+    name: 'EVA K.',
+    title: 'Power ab 50',
+    description: '„Mit über 50 dachte ich, große Veränderungen sind kaum noch möglich. Die Unterstützung in der Community hat so viel in mir ausgelöst. Ich habe nicht nur abgenommen, sondern auch ein völlig neues Mindset entwickelt.“'
+  },
+  {
+    image: '/images/results/Manu_H.webp',
+    name: 'MANU H.',
+    title: 'Fitter & Definierter',
+    description: '„Sport war immer Teil meines Lebens, aber Ernährung habe ich unterschätzt. Mit den Lösungen bin ich jetzt leistungsfähiger, definierter und einfach fitter.“'
+  },
+  {
+    image: '/images/results/Martina_O.webp',
+    name: 'MARTINA O.',
+    title: 'Fit nach Schwangerschaft',
+    description: '„Nach der Schwangerschaft wollte ich mich wieder wohlfühlen. Ich habe schnell wieder meine Form bekommen, mein Hautbild verbessert und auch viel mehr Energie für meinen Sohn.“'
   }
 ];
 
@@ -62,6 +50,7 @@ const feedbackImages = [
 export default function Results() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -112,8 +101,8 @@ export default function Results() {
           <h2 className="text-4xl md:text-6xl font-black text-brand-dark mb-6 leading-tight">
             UNSERE <span className="text-brand-green">RESULTATE</span>
           </h2>
-          <p className="text-brand-dark/40 text-lg md:text-xl max-w-2xl mx-auto">
-            Hunderte Menschen haben mit unserer Hilfe bereits ihr Leben verändert.
+          <p className="text-brand-dark/40 text-lg md:text-xl whitespace-nowrap mx-auto">
+            Keine leeren Versprechen - echte Menschen mit echten Ergebnissen.
           </p>
         </div>
 
@@ -213,12 +202,13 @@ export default function Results() {
           {feedbackImages.map((img, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+              className="bg-white rounded-xl shadow-lg overflow-hidden card-hover cursor-pointer"
+              onClick={() => setSelectedImage(img.src)}
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
             </div>
@@ -232,11 +222,37 @@ export default function Results() {
             className={`bg-brand-green text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 mx-auto 
                        transition-all duration-500 hover:bg-brand-green-dark hover:scale-105 shadow-xl shadow-brand-green/20`}
           >
-            Werde auch du zur Erfolgsgeschichte
+            Schreibe nun DEINE Erfolgsgeschichte
             <ArrowRight size={22} />
           </button>
         </div>
       </div>
+
+      {/* Image Zoom Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm cursor-zoom-out"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-5xl w-full h-full flex items-center justify-center">
+            <button
+              className="absolute top-4 right-4 z-50 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <X size={24} />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Enlarged feedback"
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -138,7 +138,7 @@ export default function Hero() {
               <div className="w-px h-10 bg-white/10 hidden sm:block" />
               <div className="flex flex-col">
                 <span className="text-3xl font-black text-white">100%</span>
-                <span className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">ERFOLGSQUOTE</span>
+                <span className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">UNTERSTÜTZUNG</span>
               </div>
             </div>
           </div>

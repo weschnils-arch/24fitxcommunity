@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Calendar, ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 
 const benefits = [
-  '100% kostenlos & unverbindlich',
-  'Persönliche Zielanalyse',
-  'Individuelle Beratung',
+  'Kostenlos',
+  'Unverbindlich',
+  'Persönlich',
 ];
 
 export default function CTA() {
@@ -66,29 +66,24 @@ export default function CTA() {
         <div className="text-center">
           {/* Headline */}
           <h2
-            className={`text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
-            Bereit, deine Geschichte neu zu schreiben?
+            Worauf wartest du noch?
           </h2>
 
           {/* Description */}
           <p
-            className={`text-white/90 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`text-white/90 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl mx-auto transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
-            Warte nicht länger auf den perfekten Moment. Der perfekte Moment ist jetzt.
-            Mache den ersten Schritt und buche dein 100% kostenloses und unverbindliches
-            Erstgespräch.
+            Dein kostenloses, unverbindliches Erstgespräch ist nur einen Klick entfernt. Lass uns gemeinsam herausfinden, wie du deine Ziele erreichst.
           </p>
 
           {/* Benefits */}
           <div
-            className={`flex flex-wrap items-center justify-center gap-4 mb-10 transition-all duration-700 delay-200 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`flex flex-wrap items-center justify-center gap-4 mb-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
             {benefits.map((benefit, index) => (
               <div
@@ -105,19 +100,16 @@ export default function CTA() {
           {!showForm ? (
             <button
               onClick={() => setShowForm(true)}
-              className={`btn-white flex items-center gap-3 mx-auto transition-all duration-700 delay-300 ${
-                isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'
-              }`}
+              className={`btn-white flex items-center justify-center gap-3 font-bold text-[17px] mx-auto transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'
+                }`}
             >
-              <Calendar size={24} />
-              JETZT KOSTENLOSES ERSTGESPRÄCH BUCHEN
-              <ArrowRight size={24} />
+              Jetzt kostenloses Erstgespräch buchen
+              <ArrowRight size={20} />
             </button>
           ) : !isSubmitted ? (
             <div
-              className={`bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-auto transition-all duration-500 ${
-                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-              }`}
+              className={`bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-auto transition-all duration-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`}
             >
               <h3 className="text-2xl font-bold text-brand-dark mb-2">
                 Erstgespräch buchen
@@ -172,9 +164,8 @@ export default function CTA() {
             </div>
           ) : (
             <div
-              className={`bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-auto text-center transition-all duration-500 ${
-                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-              }`}
+              className={`bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-auto text-center transition-all duration-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`}
             >
               <div className="w-20 h-20 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle size={40} className="text-brand-green" />
@@ -190,13 +181,13 @@ export default function CTA() {
 
           {/* Trust Badge */}
           {!showForm && (
-            <p
-              className={`text-white/70 text-sm mt-6 transition-all duration-700 delay-400 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
+            <div
+              className={`inline-flex items-center justify-center gap-2 bg-black/20 px-5 py-2.5 rounded-full text-white/90 text-sm mt-8 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
             >
-              Keine versteckten Kosten. Keine Verpflichtungen.
-            </p>
+              <Clock size={16} />
+              <span>Sichere dir jetzt einen der <strong className="font-semibold text-white">limitierten Plätze</strong> diese Woche</span>
+            </div>
           )}
         </div>
       </div>

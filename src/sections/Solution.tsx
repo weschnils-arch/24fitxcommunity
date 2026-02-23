@@ -78,6 +78,12 @@ export default function Solution() {
 
           {/* Content */}
           <div>
+            <span
+              className={`block text-brand-green font-bold tracking-[0.2em] text-sm uppercase mb-3 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
+            >
+              Die Lösung
+            </span>
             <h2
               className={`section-title transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}

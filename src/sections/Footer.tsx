@@ -109,27 +109,35 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Mail size={20} className="text-brand-green flex-shrink-0 mt-0.5" />
                 <a
-                  href="mailto:info@24fitxcommunity.de"
+                  href="mailto:fit-with-sarah-and-patrick@hotmail.com"
                   className="text-brand-dark/60 hover:text-brand-green transition-colors duration-200"
                 >
-                  info@24fitxcommunity.de
+                  fit-with-sarah-and-patrick@hotmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={20} className="text-brand-green flex-shrink-0 mt-0.5" />
-                <a
-                  href="tel:+491234567890"
-                  className="text-brand-dark/60 hover:text-brand-green transition-colors duration-200"
-                >
-                  +49 123 456 7890
-                </a>
+                <div className="flex flex-col gap-1">
+                  <a
+                    href="tel:+436643835417"
+                    className="text-brand-dark/60 hover:text-brand-green transition-colors duration-200"
+                  >
+                    Sarah: +43 6643835417
+                  </a>
+                  <a
+                    href="tel:+4369910533764"
+                    className="text-brand-dark/60 hover:text-brand-green transition-colors duration-200"
+                  >
+                    Patrick: +43 69910533764
+                  </a>
+                </div>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={20} className="text-brand-green flex-shrink-0 mt-0.5" />
                 <span className="text-brand-dark/60">
-                  Musterstraße 123
+                  Am Anger 1
                   <br />
-                  12345 Musterstadt
+                  7210 Mattersburg
                 </span>
               </li>
             </ul>
