@@ -12,6 +12,8 @@ export default function CTA() {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -32,10 +34,30 @@ export default function CTA() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    // Here you would typically send the data to your backend
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch('https://formspree.io/f/fit-with-sarah-and-patrick@hotmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        throw new Error('Fehler beim Senden der Nachricht. Bitte versuche es später erneut.');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Ein unerwarteter Fehler ist aufgetreten.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -153,12 +175,16 @@ export default function CTA() {
                              text-brand-dark placeholder-gray-400"
                   />
                 </div>
+                {error && (
+                  <p className="text-red-500 text-sm mt-2">{error}</p>
+                )}
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full bg-brand-green text-white py-4 rounded-lg font-bold text-lg
-                           transition-all duration-300 hover:bg-brand-green-dark hover:scale-[1.02]"
+                           transition-all duration-300 hover:bg-brand-green-dark hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Termin vereinbaren
+                  {isSubmitting ? 'Wird gesendet...' : 'Termin vereinbaren'}
                 </button>
               </form>
             </div>

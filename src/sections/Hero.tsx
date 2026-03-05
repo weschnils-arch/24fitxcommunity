@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Play, Star, ArrowRight, Flame, Volume2, VolumeX } from 'lucide-react';
+import { Play, Star, ArrowRight, Flame } from 'lucide-react';
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -15,13 +13,6 @@ export default function Hero() {
     const element = document.querySelector('#cta');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
     }
   };
 
@@ -113,7 +104,7 @@ export default function Hero() {
                 <ArrowRight size={22} />
               </button>
               <button
-                onClick={scrollToCTA}
+                onClick={() => window.open('https://www.youtube.com/watch?v=Z_ROmD8Tnto&t=1s', '_blank')}
                 className="w-full sm:w-auto bg-white/5 backdrop-blur-md border border-white/10 text-white px-8 py-5 rounded-xl
                            font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 hover:bg-white/10"
               >
@@ -160,26 +151,15 @@ export default function Hero() {
             <div className="relative group">
               <div className="absolute -inset-4 bg-brand-green/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02]">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500"
-                >
-                  <source src="/videos/hero-video.webm" type="video/webm" />
-                </video>
+                <iframe
+                  className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500 pointer-events-none"
+                  src="https://www.youtube.com/embed/Z_ROmD8Tnto?autoplay=1&mute=1&loop=1&playlist=Z_ROmD8Tnto&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+                  title="YouTube background video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
                 <div className="absolute inset-0 bg-[#0A1A12]/10 transition-colors" />
 
-                {/* Speaker Toggle Overlay */}
-                <button
-                  onClick={toggleMute}
-                  className="absolute bottom-6 right-6 z-20 w-12 h-12 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-brand-green transition-all duration-300 shadow-xl"
-                  aria-label={isMuted ? "Ton einschalten" : "Ton ausschalten"}
-                >
-                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                </button>
+                {/* Speaker Toggle Overlay (Removed as iframe control is limited) */}
 
                 {/* Badge on Video */}
                 <div className="absolute bottom-6 left-6 bg-brand-green/90 backdrop-blur-md px-4 py-2 rounded-lg flex items-center gap-2">
