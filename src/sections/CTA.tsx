@@ -40,7 +40,7 @@ export default function CTA() {
     setError(null);
 
     try {
-      const response = await fetch('https://formspree.io/f/fit-with-sarah-and-patrick@hotmail.com', {
+      const response = await fetch('https://formspree.io/f/mojkanak', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
