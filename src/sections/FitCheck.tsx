@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Zap, Dumbbell, Salad, ArrowRight, Check } from 'lucide-react';
+import { ContactPopup } from '@/components/ContactPopup';
 
 const options = [
     {
@@ -38,12 +39,6 @@ export default function FitCheck() {
         });
     };
 
-    const scrollToCTA = () => {
-        const element = document.querySelector('#cta');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
     if (showResults) {
         return (
@@ -66,13 +61,14 @@ export default function FitCheck() {
                                 Genau bei diesen Themen können wir dir am besten helfen. Der nächste Schritt ist ein <span className="text-brand-dark font-bold">kurzes, kostenloses Erstgespräch</span>, in dem wir unverbindlich schauen, wie wir deine Ziele am schnellsten erreichen.
                             </p>
 
-                            <button
-                                onClick={scrollToCTA}
-                                className="w-full md:w-auto bg-[#2D6A4F] text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 hover:bg-[#1B4332] hover:scale-105 shadow-xl"
-                            >
-                                Jetzt kostenloses Erstgespräch buchen
-                                <ArrowRight size={22} />
-                            </button>
+                            <ContactPopup>
+                                <button
+                                    className="w-full md:w-auto bg-[#2D6A4F] text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 hover:bg-[#1B4332] hover:scale-105 shadow-xl"
+                                >
+                                    Jetzt kostenloses Erstgespräch buchen
+                                    <ArrowRight size={22} />
+                                </button>
+                            </ContactPopup>
 
                             <button
                                 onClick={() => setShowResults(false)}

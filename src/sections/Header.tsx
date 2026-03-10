@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { ContactPopup } from '@/components/ContactPopup';
 
 const navLinks = [
   { name: 'Start', href: '#hero' },
@@ -77,17 +78,14 @@ export default function Header() {
 
           {/* CTA Button Area - Right Aligned */}
           <div className="hidden lg:flex items-center justify-end w-[200px] md:w-[250px] flex-shrink-0">
-            <a
-              href="#cta"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#cta');
-              }}
-              className="bg-brand-green text-white px-6 py-2.5 rounded-xl font-bold whitespace-nowrap
-                         transition-all duration-300 hover:bg-brand-green-dark hover:scale-105 text-sm xl:text-base shadow-lg shadow-brand-green/10"
-            >
-              Erstgespräch buchen
-            </a>
+            <ContactPopup>
+              <button
+                className="bg-brand-green text-white px-6 py-2.5 rounded-xl font-bold whitespace-nowrap
+                           transition-all duration-300 hover:bg-brand-green-dark hover:scale-105 text-sm xl:text-base shadow-lg shadow-brand-green/10"
+              >
+                Erstgespräch buchen
+              </button>
+            </ContactPopup>
           </div>
 
           {/* Mobile Menu Button */}
@@ -125,17 +123,14 @@ export default function Header() {
               {link.name}
             </a>
           ))}
-          <a
-            href="#cta"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('#cta');
-            }}
-            className="mt-4 mx-4 bg-brand-green text-white px-6 py-3 rounded-lg font-semibold 
-                       text-center transition-all duration-300 hover:bg-brand-green-dark"
-          >
-            Erstgespräch buchen
-          </a>
+          <ContactPopup>
+            <button
+              className="mt-4 mx-4 bg-brand-green text-white px-6 py-3 rounded-lg font-semibold 
+                         text-center transition-all duration-300 hover:bg-brand-green-dark"
+            >
+              Erstgespräch buchen
+            </button>
+          </ContactPopup>
         </nav>
       </div>
     </header>

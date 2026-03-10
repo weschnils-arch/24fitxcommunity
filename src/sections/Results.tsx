@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight, X } from 'lucide-react';
+import { ContactPopup } from '@/components/ContactPopup';
 
 const transformations = [
   {
@@ -79,12 +80,6 @@ export default function Results() {
     setCurrentSlide((prev) => (prev - 1 + transformations.length) % transformations.length);
   };
 
-  const scrollToCTA = () => {
-    const element = document.querySelector('#cta');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section
@@ -149,12 +144,13 @@ export default function Results() {
                       </div>
 
                       <div className="mt-auto">
-                        <button
-                          onClick={scrollToCTA}
-                          className="bg-brand-dark/20 text-brand-dark hover:bg-brand-green hover:text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300"
-                        >
-                          JETZT DEIN RESULTAT ERZIELEN!
-                        </button>
+                        <ContactPopup>
+                          <button
+                            className="bg-brand-dark/20 text-brand-dark hover:bg-brand-green hover:text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300"
+                          >
+                            JETZT DEIN RESULTAT ERZIELEN!
+                          </button>
+                        </ContactPopup>
                       </div>
 
                       <span className="absolute -bottom-10 -right-2 text-8xl text-brand-dark/5 font-serif pointer-events-none rotate-180">"</span>
@@ -217,14 +213,15 @@ export default function Results() {
 
         {/* Global CTA Button */}
         <div className="text-center">
-          <button
-            onClick={scrollToCTA}
-            className={`bg-brand-green text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 mx-auto 
-                       transition-all duration-500 hover:bg-brand-green-dark hover:scale-105 shadow-xl shadow-brand-green/20`}
-          >
-            Schreibe nun DEINE Erfolgsgeschichte
-            <ArrowRight size={22} />
-          </button>
+          <ContactPopup>
+            <button
+              className={`bg-brand-green text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 mx-auto 
+                         transition-all duration-500 hover:bg-brand-green-dark hover:scale-105 shadow-xl shadow-brand-green/20`}
+            >
+              Schreibe nun DEINE Erfolgsgeschichte
+              <ArrowRight size={22} />
+            </button>
+          </ContactPopup>
         </div>
       </div>
 

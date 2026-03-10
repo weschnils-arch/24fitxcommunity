@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Salad, Dumbbell, Users, ArrowRight } from 'lucide-react';
+import { ContactPopup } from '@/components/ContactPopup';
 
 const pillars = [
   {
@@ -41,12 +42,6 @@ export default function Solution() {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToCTA = () => {
-    const element = document.querySelector('#cta');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section
@@ -130,14 +125,15 @@ export default function Solution() {
             </div>
 
             {/* CTA Button */}
-            <button
-              onClick={scrollToCTA}
-              className={`btn-primary flex items-center gap-2 transition-all duration-700 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-            >
-              Entdecke unser Konzept
-              <ArrowRight size={20} />
-            </button>
+            <ContactPopup>
+              <button
+                className={`btn-primary flex items-center gap-2 transition-all duration-700 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                  }`}
+              >
+                Entdecke unser Konzept
+                <ArrowRight size={20} />
+              </button>
+            </ContactPopup>
           </div>
         </div>
       </div>

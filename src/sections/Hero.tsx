@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Star, ArrowRight, Flame } from 'lucide-react';
 
+import { ContactPopup } from '@/components/ContactPopup';
+
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -8,13 +10,6 @@ export default function Hero() {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
-  const scrollToCTA = () => {
-    const element = document.querySelector('#cta');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section
@@ -95,14 +90,15 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-5 mb-16">
-              <button
-                onClick={scrollToCTA}
-                className="w-full sm:w-auto bg-brand-green text-white px-10 py-5 rounded-xl font-bold text-lg
-                           flex items-center justify-center gap-3 transition-all duration-300 hover:bg-brand-green-dark hover:scale-105 shadow-xl shadow-brand-green/20"
-              >
-                JETZT STARTEN
-                <ArrowRight size={22} />
-              </button>
+              <ContactPopup>
+                <button
+                  className="w-full sm:w-auto bg-brand-green text-white px-10 py-5 rounded-xl font-bold text-lg
+                             flex items-center justify-center gap-3 transition-all duration-300 hover:bg-brand-green-dark hover:scale-105 shadow-xl shadow-brand-green/20"
+                >
+                  JETZT STARTEN
+                  <ArrowRight size={22} />
+                </button>
+              </ContactPopup>
               <button
                 onClick={() => window.open('https://www.youtube.com/watch?v=Z_ROmD8Tnto&t=1s', '_blank')}
                 className="w-full sm:w-auto bg-white/5 backdrop-blur-md border border-white/10 text-white px-8 py-5 rounded-xl
