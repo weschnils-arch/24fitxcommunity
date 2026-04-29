@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { redis, LEADS_KEY, type Lead, requireAuth } from './_lib';
+import { redis, LEADS_KEY, type Lead, requireAuth } from './_lib.js';
 
 function csvCell(v: string): string {
   return `"${v.replace(/"/g, '""').replace(/\r?\n/g, ' ')}"`;

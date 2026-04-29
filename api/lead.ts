@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { redis, LEADS_KEY, type Lead, clientIp } from './_lib';
+import { redis, LEADS_KEY, type Lead, clientIp } from './_lib.js';
 
 const FORMSPREE_URL = 'https://formspree.io/f/mojkanak';
 

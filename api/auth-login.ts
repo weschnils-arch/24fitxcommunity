@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import jwt from 'jsonwebtoken';
-import { jwtSecret, redis, clientIp } from './_lib';
+import { jwtSecret, redis, clientIp } from './_lib.js';
 
 const MAX_FAILS = 10;
 const WINDOW_SECONDS = 600;
