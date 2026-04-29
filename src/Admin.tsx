@@ -1,4 +1,92 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
+
+type SaveState = 'idle' | 'saving' | 'saved' | 'error';
+
+function NoteCell({
+  leadId,
+  initial,
+  token,
+  onChangeLocal,
+}: {
+  leadId: string;
+  initial: string;
+  token: string;
+  onChangeLocal: (v: string) => void;
+}) {
+  const [value, setValue] = useState(initial);
+  const [state, setState] = useState<SaveState>('idle');
+  const lastSavedRef = useRef(initial);
+  const timerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (initial !== lastSavedRef.current) {
+      setValue(initial);
+      lastSavedRef.current = initial;
+    }
+  }, [initial]);
+
+  function scheduleSave(next: string) {
+    if (timerRef.current) window.clearTimeout(timerRef.current);
+    setState('idle');
+    timerRef.current = window.setTimeout(() => void save(next), 700);
+  }
+
+  async function save(next: string) {
+    if (next === lastSavedRef.current) return;
+    setState('saving');
+    try {
+      const res = await fetch('/api/lead-note', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id: leadId, note: next }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      lastSavedRef.current = next;
+      setState('saved');
+      window.setTimeout(() => setState('idle'), 1500);
+    } catch {
+      setState('error');
+    }
+  }
+
+  return (
+    <div className="flex flex-col gap-1">
+      <textarea
+        value={value}
+        onChange={(e) => {
+          const v = e.target.value;
+          setValue(v);
+          onChangeLocal(v);
+          scheduleSave(v);
+        }}
+        onBlur={() => {
+          if (timerRef.current) window.clearTimeout(timerRef.current);
+          void save(value);
+        }}
+        rows={2}
+        placeholder="Notiz hinzufügen …"
+        className="w-full bg-white border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-green/40 focus:border-brand-green resize-y"
+      />
+      <span
+        className={
+          'text-[11px] ' +
+          (state === 'saving'
+            ? 'text-gray-400'
+            : state === 'saved'
+            ? 'text-brand-green'
+            : state === 'error'
+            ? 'text-red-500'
+            : 'text-transparent select-none')
+        }
+      >
+        {state === 'saving' ? 'speichert …' : state === 'saved' ? '✓ gespeichert' : state === 'error' ? 'Fehler beim Speichern' : 'placeholder'}
+      </span>
+    </div>
+  );
+}
 
 type Lead = {
   id: string;
@@ -9,6 +97,7 @@ type Lead = {
   message: string;
   ip: string;
   ua: string;
+  note: string;
 };
 
 const TOKEN_KEY = '24fit_admin_token';
@@ -113,9 +202,14 @@ export default function Admin() {
       l.name.toLowerCase().includes(q) ||
       l.email.toLowerCase().includes(q) ||
       l.phone.toLowerCase().includes(q) ||
-      l.message.toLowerCase().includes(q)
+      l.message.toLowerCase().includes(q) ||
+      (l.note || '').toLowerCase().includes(q)
     );
   });
+
+  function updateNoteLocally(id: string, note: string) {
+    setLeads((prev) => prev ? prev.map((l) => l.id === id ? { ...l, note } : l) : prev);
+  }
 
   const csvHref = `/api/leads-csv?token=${encodeURIComponent(token)}`;
 
@@ -178,6 +272,7 @@ export default function Admin() {
                     <th className="px-4 py-3 font-semibold">E-Mail</th>
                     <th className="px-4 py-3 font-semibold">Telefon</th>
                     <th className="px-4 py-3 font-semibold">Nachricht</th>
+                    <th className="px-4 py-3 font-semibold">Notiz</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -194,6 +289,14 @@ export default function Admin() {
                         <a href={`tel:${l.phone}`} className="text-gray-700 hover:text-gray-900">{l.phone}</a>
                       </td>
                       <td className="px-4 py-3 text-gray-700 max-w-md whitespace-pre-wrap">{l.message || <span className="text-gray-400">—</span>}</td>
+                      <td className="px-4 py-3 min-w-[260px]">
+                        <NoteCell
+                          leadId={l.id}
+                          initial={l.note}
+                          token={token}
+                          onChangeLocal={(v) => updateNoteLocally(l.id, v)}
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
