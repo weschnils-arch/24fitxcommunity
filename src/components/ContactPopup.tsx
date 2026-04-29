@@ -24,7 +24,7 @@ export function ContactPopup({ children }: ContactPopupProps) {
         setError(null);
 
         try {
-            const response = await fetch('https://formspree.io/f/mojkanak', {
+            const response = await fetch('/api/lead', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
